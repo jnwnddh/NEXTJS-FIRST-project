@@ -1,11 +1,11 @@
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { CREATE_BOARD } from "./BoardWrite.query";
+import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.query";
 import BoardWriteUI from "./BoardWrite.presenter"
 
 
-export default function BoardWrite() {
+export default function BoardWrite(props) {
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
@@ -17,31 +17,54 @@ export default function BoardWrite() {
   const [ContentsError, setContentsError] = useState("");
 
   const [createBoard] = useMutation(CREATE_BOARD);
-  const router = useRouter();
+  const [updateBoard] = useMutation(UPDATE_BOARD)
 
+  const router = useRouter();
+  const [isActive,setIsActive] = useState(false)
   const onChangeWriter = (e) => {
     setWriter(e.target.value);
     if (e.target.value !== "") {
       setWriteError("");
     }
+      if (e.target.value && password && title  && contents) {
+        setIsActive(true);
+      }else{
+        setIsActive(false)
+      }
   };
   const onChangePassword = (e) => {
     setPassword(e.target.value);
     if (e.target.value !== "") {
       setPasswordError("");
     }
+      if (e.target.value && password && title && contents) {
+        setIsActive(true);
+      } else {
+        setIsActive(false);
+      }
   };
   const onChangeTitle = (e) => {
     setTitle(e.target.value);
     if (e.target.value !== "") {
       setTitleError("");
     }
+      if (e.target.value && password && title && contents) {
+        setIsActive(true);
+      } else {
+        setIsActive(false);
+      }
   };
   const onChangeContents = (e) => {
     setContents(e.target.value);
     if (e.target.value !== "") {
       setContentsError("");
     }
+      if (e.target.value && password && title && contents) {
+        setIsActive(true);
+      } else {
+        setIsActive(false);
+      }
+
   };
 
   const onClickSubmit = async () => {
@@ -78,15 +101,38 @@ export default function BoardWrite() {
     }
   };
 
-  return (<BoardWriteUI 
-  WriteError={WriteError}
-  passwordError={passwordError}
-  titleError={titleError}
-  ContentsError={ContentsError}
-  onChangeWriter={onChangeWriter}
-  onChangePassword={onChangePassword}
-  onChangeTitle={onChangeTitle}
-  onChangeContents={onChangeContents}
-  onClickSubmit={onClickSubmit}
-  />);
+  const onClickUpdate = async () => {
+    try{
+      const result = await updateBoard({
+        variables:{
+          boardId:router.query.boardId,
+          password:password,
+          updateBoardInput:{
+            title:title,
+            contents:contents
+          }
+        }
+      })
+      router.push(`/boards/${router.query.boardId}`);
+      alert("수정완료")
+    }catch(error){
+      alert(error.message)
+    }
+  }
+  return (
+    <BoardWriteUI
+      isActive={isActive}
+      isEdit={props.isEdit}
+      WriteError={WriteError}
+      passwordError={passwordError}
+      titleError={titleError}
+      ContentsError={ContentsError}
+      onChangeWriter={onChangeWriter}
+      onChangePassword={onChangePassword}
+      onChangeTitle={onChangeTitle}
+      onChangeContents={onChangeContents}
+      onClickSubmit={onClickSubmit}
+      onClickUpdate={onClickUpdate}
+    />
+  );
 }

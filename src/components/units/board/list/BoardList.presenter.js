@@ -13,13 +13,10 @@ export default function BoardListUI(props){
         {props.data?.fetchBoards.map((el) => (
           <t.Wrapper key={el._id}>
             <div>{String(el._id).slice(-4).toUpperCase()}</div>
-
             <div>{el.writer}</div>
-
             <div id={el._id} onClick={props.onClickMoveToBoardDetail}>
               {el.title}
             </div>
-
             <div>{getMyDate(el.createdAt)}</div>
           </t.Wrapper>
         ))}

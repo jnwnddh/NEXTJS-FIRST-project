@@ -164,8 +164,8 @@ export const SubmitButton = styled.button`
   margin-left: 12px;
   margin-right: 12px;
   background-color: yellow;
-  
+
   :hover {
-    cursor: pointer
+    cursor: pointer;
   }
 `;

@@ -10,7 +10,6 @@ export default function BoardWrite(props) {
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
-
   const [WriteError, setWriteError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [titleError, setTitleError] = useState("");
@@ -26,10 +25,15 @@ export default function BoardWrite(props) {
     if (e.target.value !== "") {
       setWriteError("");
     }
-      if (e.target.value && password && title  && contents) {
+      if (
+        e.target.value !== "" &&
+        password !== "" &&
+        title !== "" &&
+        contents !== ""
+      ) {
         setIsActive(true);
-      }else{
-        setIsActive(false)
+      } else {
+        setIsActive(false);
       }
   };
   const onChangePassword = (e) => {
@@ -37,7 +41,12 @@ export default function BoardWrite(props) {
     if (e.target.value !== "") {
       setPasswordError("");
     }
-      if (e.target.value && password && title && contents) {
+      if (
+        e.target.value !== "" &&
+        password !== "" &&
+        title !== "" &&
+        contents !== ""
+      ) {
         setIsActive(true);
       } else {
         setIsActive(false);
@@ -48,7 +57,12 @@ export default function BoardWrite(props) {
     if (e.target.value !== "") {
       setTitleError("");
     }
-      if (e.target.value && password && title && contents) {
+      if (
+        e.target.value !== "" &&
+        password !== "" &&
+        title !== "" &&
+        contents !== ""
+      ) {
         setIsActive(true);
       } else {
         setIsActive(false);
@@ -59,7 +73,12 @@ export default function BoardWrite(props) {
     if (e.target.value !== "") {
       setContentsError("");
     }
-      if (e.target.value && password && title && contents) {
+      if (
+        e.target.value !== "" &&
+        password !== "" &&
+        title !== "" &&
+        contents !== ""
+      ) {
         setIsActive(true);
       } else {
         setIsActive(false);
@@ -93,7 +112,6 @@ export default function BoardWrite(props) {
           },
         });
         alert("등록완료");
-        console.log(result.data.createBoard._id);
         router.push(`/boards/${result.data.createBoard._id}`);
       } catch (error) {
         alert(error.message);
@@ -101,20 +119,29 @@ export default function BoardWrite(props) {
     }
   };
 
+
+  //현재 myVariables를 사용하고 계신데, 만약 title이나 contents가 있다면 myVariables 객체에 담아주고, 요청을 
+  //보낼 때는 variables 어디에도 사용되고 있지 않습니다. 참고되시기 바랍니다!
+
+
   const onClickUpdate = async () => {
+
+    const myvariables = {title:title,contents:contents,};
+    if (title) myvariables.title = title;
+    if(contents) myvariables.contents = contents;
+    // if(writer !== "") myVariables.writer = writer;
+    // if(password!=="")myVariables.password = password
     try{
       const result = await updateBoard({
-        variables:{
-          boardId:router.query.boardId,
-          password:password,
-          updateBoardInput:{
-            title:title,
-            contents:contents
-          }
-        }
-      })
-      router.push(`/boards/${router.query.boardId}`);
+        variables: {
+          boardId: router.query.boardId,
+          password: password,
+          updateBoardInput: myvariables,
+        },
+      });
+      router.push(`/boards/${result.data.updateBoard._id}`);
       alert("수정완료")
+      console.log(result)
     }catch(error){
       alert(error.message)
     }
@@ -133,6 +160,7 @@ export default function BoardWrite(props) {
       onChangeContents={onChangeContents}
       onClickSubmit={onClickSubmit}
       onClickUpdate={onClickUpdate}
+      data={props.data}
     />
   );
 }

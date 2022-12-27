@@ -3,7 +3,7 @@ import * as t from "./BoardWrite.style"
 export default function BoardWriteUI(props){
      return (
        <t.Wrapper>
-         <t.Title>게시판 등록</t.Title>
+         <t.Title> {props.isEdit ? "수정하기" : "등록하기"}</t.Title>
          <t.WriterWrapper>
            <t.InputWrapper>
              <t.Label>작성자</t.Label>
@@ -11,6 +11,7 @@ export default function BoardWriteUI(props){
                type="text"
                placeholder="이름을 적어주세요."
                onChange={props.onChangeWriter}
+               defaultValue={props.data?.fetchBoard.writer}
              />
              <div>{props.WriteError}</div>
            </t.InputWrapper>
@@ -30,6 +31,7 @@ export default function BoardWriteUI(props){
              type="text"
              placeholder="제목을 작성해주세요."
              onChange={props.onChangeTitle}
+             defaultValue={props.data?.fetchBoard.title}
            />
            <div>{props.titleError}</div>
          </t.InputWrapper>
@@ -38,6 +40,7 @@ export default function BoardWriteUI(props){
            <t.Contents
              placeholder="내용을 작성해주세요."
              onChange={props.onChangeContents}
+             defaultValue={props.data?.fetchBoard.contents}
            />
            <div>{props.ContentsError}</div>
          </t.InputWrapper>

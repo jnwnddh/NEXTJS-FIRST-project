@@ -126,18 +126,21 @@ export default function BoardWrite(props) {
 
   const onClickUpdate = async () => {
 
-    const myvariables = {title:title,contents:contents,};
-    if (title) myvariables.title = title;
-    if(contents) myvariables.contents = contents;
+    const myvariables = {
+      boardId: router.query.boardId,
+      password: password,
+      updateBoardInput:{
+        title,
+        contents
+      }
+    };
+    if (title !== "") myvariables.title = title;
+    if(contents !== "") myvariables.contents = contents;
     // if(writer !== "") myVariables.writer = writer;
     // if(password!=="")myVariables.password = password
     try{
       const result = await updateBoard({
-        variables: {
-          boardId: router.query.boardId,
-          password: password,
-          updateBoardInput: myvariables,
-        },
+        variables: myvariables,
       });
       router.push(`/boards/${result.data.updateBoard._id}`);
       alert("수정완료")

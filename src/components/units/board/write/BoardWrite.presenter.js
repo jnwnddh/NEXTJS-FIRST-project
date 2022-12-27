@@ -7,12 +7,16 @@ export default function BoardWriteUI(props) {
       <t.WriterWrapper>
         <t.InputWrapper>
           <t.Label>작성자</t.Label>
-          <t.Writer
-            type="text"
-            placeholder="이름을 적어주세요."
-            onChange={props.onChangeWriter}
-            defaultValue={props.data?.fetchBoard.writer}
-          />
+          {props.isEdit ? (
+            <div>{props.data?.fetchBoard.writer}</div>
+          ) : (
+            <t.Writer
+              type="text"
+              placeholder="이름을 적어주세요."
+              onChange={props.onChangeWriter}
+              defaultValue={props.data?.fetchBoard.writer}
+            />
+          )}
           <div>{props.WriteError}</div>
         </t.InputWrapper>
         <t.InputWrapper>

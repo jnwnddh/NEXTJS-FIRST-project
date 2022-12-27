@@ -1,6 +1,6 @@
 import { getMyDate } from "../../../commons/utils/utils";
-import * as t from "./BoardList.style"
-export default function BoardListUI(props){
+import * as t from "./BoardList.style";
+export default function BoardListUI(props) {
   return (
     <>
       <t.Container>

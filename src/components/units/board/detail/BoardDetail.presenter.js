@@ -19,6 +19,7 @@ export default function BoardDetailUI(props) {
       >
         수정하기로 이동
       </button>
+      <button onClick={props.onClickDelete}>삭제</button>
     </>
   );
 }

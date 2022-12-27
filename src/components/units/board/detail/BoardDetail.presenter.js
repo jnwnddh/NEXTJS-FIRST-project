@@ -9,14 +9,15 @@ export default function BoardDetailUI(props){
     return (
       <>
         <div>상세페이지</div>
+        <div>작성자</div>
         <div>{props.data?.fetchBoard?.writer}</div>
         <div>{getMyDate(props.data?.fetchBoard?.createdAt)}</div>
+        <div>제목</div>
         <div>{props.data?.fetchBoard?.title}</div>
+        <div>내용</div>
         <div>{props.data?.fetchBoard?.contents}</div>
         <button
-          onClick={() =>
-            router.push(`/boards/${router.query.boardId}/edit`)
-          }
+          onClick={() => router.push(`/boards/${router.query.boardId}/edit`)}
         >
           수정하기로 이동
         </button>

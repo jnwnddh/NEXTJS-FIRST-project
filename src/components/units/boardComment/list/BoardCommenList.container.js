@@ -13,13 +13,14 @@ export default function BoardCommentList() {
   const { data } = useQuery(FETCH_BOARD_COMMENTS, {
     variables: { boardId: router.query.boardId },
   });
-  const onClickDelete = async (e) => {
-    const myPassword = prompt("비밀번호를 입력하세요");
+
+  const onClickDelete = async (event) => {
+    const myPassword = prompt("비밀번호를 입력하세요.");
     try {
       await deleteBoardComment({
         variables: {
           password: myPassword,
-          BoardCommentId: e.target.id,
+          boardCommentId: event.target.id,
         },
         refetchQueries: [
           {

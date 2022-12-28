@@ -1,5 +1,23 @@
 import * as t from "./BoardWrite.style";
 
+// interface IProps{
+//알트 + 컨트롤 + 방향키아래 = 다중글쓰기 =====중요
+//컨트롤 쉬프트 오른쪽 특정복사 ============중요
+// WriteError: ()=>void
+// passwordError: ()=>void
+// titleError: ()=>void
+// ContentsError: ()=>void
+// onChangeWriter: (e:ChangeEvent<HTMLInputElement>)=>void
+// onChangePassword: (e:ChangeEvent<HTMLInputElement>)=>void
+// onChangeTitle: (e:ChangeEvent<HTMLInputElement>)=>void
+// onChangeContents: (e:ChangeEvent<HTMLInputElement>)=>void
+// onClickSubmit: ()=>void
+// onClickUpdate: ()=>void
+// isActive: boolean
+// isEdit: boolean
+// data: any
+//}
+
 export default function BoardWriteUI(props) {
   return (
     <t.Wrapper>

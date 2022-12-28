@@ -1,9 +1,9 @@
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { FETCH_BOARD_COMMENTS } from "../list/BoardCommentList.presenter";
-import { CREATE_BOARD_COMMENT } from "./BoardCommentWrite.queries";
 import BoardCommentWriteUI from "./BoardCommentWrite.presenter";
+import { FETCH_BOARD_COMMENTS } from "../list/BoardCommentList.queries";
+import { CREATE_BOARD_COMMENT } from "./BoardCommentWrite.queries";
 
 export default function BoarCommentWrite() {
   const router = useRouter();
@@ -13,15 +13,15 @@ export default function BoarCommentWrite() {
 
   const [createBoardComment] = useMutation(CREATE_BOARD_COMMENT);
 
-  const onChangeWriter = (e) => {
-    setWriter(e.target.value);
+  const onChangeWriter = (event) => {
+    setWriter(event.target.value);
   };
 
-  const onChangePassword = (e) => {
-    setPassword(e.target.value);
+  const onChangePassword = (event) => {
+    setPassword(event.target.value);
   };
-  const onChangeContents = (e) => {
-    setContents(e.target.value);
+  const onChangeContents = (event) => {
+    setContents(event.target.value);
   };
 
   const onClickWrite = async () => {
@@ -29,9 +29,9 @@ export default function BoarCommentWrite() {
       await createBoardComment({
         variables: {
           createBoardCommentInput: {
-            writer,
-            password,
-            contents,
+            writer: writer,
+            password: password,
+            contents: contents,
             rating: 0,
             //별점
           },
@@ -54,8 +54,8 @@ export default function BoarCommentWrite() {
     <BoardCommentWriteUI
       onChangeWriter={onChangeWriter}
       onChangePassword={onChangePassword}
-      onClickWrite={onClickWrite}
       onChangeContents={onChangeContents}
+      onClickWrite={onClickWrite}
       contents={contents}
     />
   );

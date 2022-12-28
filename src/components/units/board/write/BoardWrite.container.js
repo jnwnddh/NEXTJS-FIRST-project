@@ -5,6 +5,10 @@ import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.query";
 import BoardWriteUI from "./BoardWrite.presenter";
 
 export default function BoardWrite(props) {
+  //나중에 props타입으로바꿀때 interface IProps{
+  //isEdit:isEdit=프롭스로받아온것 boolean=데이터의타입
+  //data?: data?=있을수도잇고없을수도잇다any
+  //}
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
@@ -19,6 +23,8 @@ export default function BoardWrite(props) {
 
   const router = useRouter();
   const [isActive, setIsActive] = useState(false);
+
+  //e:ChangeEvent<HTMLInputElement>인풋창에서체인지발생할때발생되는이벤트 =>타입설정리액트에서만듬
   const onChangeWriter = (e) => {
     setWriter(e.target.value);
     if (e.target.value !== "") {
@@ -97,11 +103,14 @@ export default function BoardWrite(props) {
       }
     }
   };
-
-  //현재 myVariables를 사용하고 계신데, 만약 title이나 contents가 있다면 myVariables 객체에 담아주고, 요청을
-  //보낼 때는 variables 어디에도 사용되고 있지 않습니다. 참고되시기 바랍니다!
-
   const onClickUpdate = async () => {
+    // interface IMYvariables{
+    //   number:number
+    //   writer?:string
+    //   title?:string
+    //   contents?:string
+    // }
+    // myVariables: IMYvariables 이런식으로 적용
     const myVariables = {};
     if (title !== "") {
       myVariables.title = title;

@@ -3,7 +3,6 @@ import { getMyDate } from "../../../commons/utils/utils";
 
 export default function BoardDetailUI(props) {
   const router = useRouter();
-  console.log(props.data);
   return (
     <>
       <div>상세페이지</div>

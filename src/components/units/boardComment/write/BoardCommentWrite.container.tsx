@@ -32,10 +32,10 @@ export default function BoarCommentWrite() {
   };
 
   const onClickWrite = async () => {
-    if (typeof router.query.boardId !== "string") {
-      alert("올바르지 않은 게시글 아이디입니다.");
-      return;
-    }
+    // if (typeof router.query.boardId !== "string") {
+    //   alert("올바르지 않은 게시글 아이디입니다.");
+    //   return;
+    // }
 
     try {
       await createBoardComment({
@@ -47,13 +47,13 @@ export default function BoarCommentWrite() {
             rating: 0,
             //별점
           },
-          boardId: router.query.boardId,
+          boardId: String(router.query.boardId),
           //게시글아이디식별
         },
         refetchQueries: [
           {
             query: FETCH_BOARD_COMMENTS,
-            variables: { boardId: router.query.boardId },
+            variables: { boardId: String(router.query.boardId) },
           },
         ],
       });

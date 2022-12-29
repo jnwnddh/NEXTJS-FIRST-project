@@ -15,11 +15,11 @@ import {
 
 export default function BoardCommentList() {
   const router = useRouter();
-  if (typeof router.query.boardId !== "string") {
-    alert("올바르지 않은 게시글 아이디입니다.");
-    void router.push("/");
-    return <></>;
-  }
+  // if (typeof router.query.boardId !== "string") {
+  //   alert("올바르지 않은 게시글 아이디입니다.");
+  //   void router.push("/");
+  //   return <></>;
+  // }
   const [deleteBoardComment] = useMutation<
     Pick<IMutation, "deleteBoardComment">,
     IMutationDeleteBoardCommentArgs
@@ -29,7 +29,7 @@ export default function BoardCommentList() {
     Pick<IQuery, "fetchBoardComments">,
     IQueryFetchBoardCommentsArgs
   >(FETCH_BOARD_COMMENTS, {
-    variables: { boardId: router.query.boardId },
+    variables: { boardId: String(router.query.boardId) },
   });
 
   const onClickDelete = async (event: MouseEvent<HTMLButtonElement>) => {

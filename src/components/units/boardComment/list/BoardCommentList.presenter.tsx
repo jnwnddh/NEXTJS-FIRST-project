@@ -1,5 +1,6 @@
 import { getMyDate } from "../../../commons/utils/utils";
 import { IBoardCommentListUIProps } from "./BoardCommentList.type";
+
 export default function BoardCommentListUI(props: IBoardCommentListUIProps) {
   console.log(props?.data?.fetchBoardComments);
   return (

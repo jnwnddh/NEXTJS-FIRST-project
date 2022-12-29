@@ -1,10 +1,17 @@
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.query";
 import BoardWriteUI from "./BoardWrite.presenter";
+import {
+  IMutation,
+  IMutationCreateBoardArgs,
+  IMutationUpdateBoardArgs,
+  IUpdateBoardInput,
+} from "../../../../commons/types/generated/types";
+import { IBoardWriteProps } from "./BoardWrite.type";
 
-export default function BoardWrite(props) {
+export default function BoardWrite(props: IBoardWriteProps) {
   //나중에 props타입으로바꿀때 interface IProps{
   //isEdit:isEdit=프롭스로받아온것 boolean=데이터의타입
   //data?: data?=있을수도잇고없을수도잇다any
@@ -13,19 +20,25 @@ export default function BoardWrite(props) {
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
-  const [WriteError, setWriteError] = useState("");
+  const [writeError, setWriteError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [titleError, setTitleError] = useState("");
-  const [ContentsError, setContentsError] = useState("");
+  const [contentsError, setContentsError] = useState("");
 
-  const [createBoard] = useMutation(CREATE_BOARD);
-  const [updateBoard] = useMutation(UPDATE_BOARD);
+  const [createBoard] = useMutation<
+    Pick<IMutation, "createBoard">,
+    IMutationCreateBoardArgs
+  >(CREATE_BOARD);
+  const [updateBoard] = useMutation<
+    Pick<IMutation, "updateBoard">,
+    IMutationUpdateBoardArgs
+  >(UPDATE_BOARD);
 
   const router = useRouter();
   const [isActive, setIsActive] = useState(false);
 
   //e:ChangeEvent<HTMLInputElement>인풋창에서체인지발생할때발생되는이벤트 =>타입설정리액트에서만듬
-  const onChangeWriter = (e) => {
+  const onChangeWriter = (e: ChangeEvent<HTMLInputElement>) => {
     setWriter(e.target.value);
     if (e.target.value !== "") {
       setWriteError("");
@@ -36,7 +49,7 @@ export default function BoardWrite(props) {
       setIsActive(false);
     }
   };
-  const onChangePassword = (e) => {
+  const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
     if (e.target.value !== "") {
       setPasswordError("");
@@ -47,7 +60,7 @@ export default function BoardWrite(props) {
       setIsActive(false);
     }
   };
-  const onChangeTitle = (e) => {
+  const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
     if (e.target.value !== "") {
       setTitleError("");
@@ -58,7 +71,7 @@ export default function BoardWrite(props) {
       setIsActive(false);
     }
   };
-  const onChangeContents = (e) => {
+  const onChangeContents = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setContents(e.target.value);
     if (e.target.value !== "") {
       setContentsError("");
@@ -104,6 +117,7 @@ export default function BoardWrite(props) {
     }
   };
   const onClickUpdate = async () => {
+    if (typeof router.query.boardId !== "string") return;
     // interface IMYvariables{
     //   number:number
     //   writer?:string
@@ -111,15 +125,12 @@ export default function BoardWrite(props) {
     //   contents?:string
     // }
     // myVariables: IMYvariables 이런식으로 적용
-    const myVariables = {};
+    const myVariables: IUpdateBoardInput = {};
     if (title !== "") {
       myVariables.title = title;
     }
     if (contents !== "") {
       myVariables.contents = contents;
-    }
-    if (writer !== "") {
-      myVariables.writer = writer;
     }
     // if (password !== "") myVariables.password = password;
     try {
@@ -131,19 +142,19 @@ export default function BoardWrite(props) {
         },
       });
       alert("수정완료");
-      router.push(`/boards/${router.query.boardId}`);
+      void router.push(`/boards/${result.data?.updateBoard._id ?? ""}`);
     } catch (error) {
-      alert(error.message);
+      if (error instanceof Error) alert(error.message);
     }
   };
   return (
     <BoardWriteUI
       isActive={isActive}
       isEdit={props.isEdit}
-      WriteError={WriteError}
+      writerError={writeError}
       passwordError={passwordError}
       titleError={titleError}
-      ContentsError={ContentsError}
+      contentsError={contentsError}
       onChangeWriter={onChangeWriter}
       onChangePassword={onChangePassword}
       onChangeTitle={onChangeTitle}

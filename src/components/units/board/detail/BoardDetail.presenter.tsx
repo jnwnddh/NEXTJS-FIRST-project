@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { getMyDate } from "../../../commons/utils/utils";
-
-export default function BoardDetailUI(props) {
+import { IBoardDetailUIProps } from "./BoardDetail.type";
+export default function BoardDetailUI(props: IBoardDetailUIProps) {
   const router = useRouter();
   return (
     <>

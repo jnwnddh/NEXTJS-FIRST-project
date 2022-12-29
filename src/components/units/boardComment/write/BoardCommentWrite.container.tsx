@@ -60,6 +60,10 @@ export default function BoarCommentWrite() {
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }
+
+    setWriter("");
+    setPassword("");
+    setContents("");
   };
 
   return (
@@ -68,6 +72,8 @@ export default function BoarCommentWrite() {
       onChangePassword={onChangePassword}
       onChangeContents={onChangeContents}
       onClickWrite={onClickWrite}
+      writer={writer}
+      password={password}
       contents={contents}
     />
   );

@@ -1,9 +1,13 @@
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import BoardCommentWriteUI from "./BoardCommentWrite.presenter";
 import { FETCH_BOARD_COMMENTS } from "../list/BoardCommentList.queries";
 import { CREATE_BOARD_COMMENT } from "./BoardCommentWrite.queries";
+import {
+  IMutation,
+  IMutationCreateBoardCommentArgs,
+} from "../../../../commons/types/generated/types";
 
 export default function BoarCommentWrite() {
   const router = useRouter();
@@ -11,20 +15,28 @@ export default function BoarCommentWrite() {
   const [password, setPassword] = useState("");
   const [contents, setContents] = useState("");
 
-  const [createBoardComment] = useMutation(CREATE_BOARD_COMMENT);
+  const [createBoardComment] = useMutation<
+    Pick<IMutation, "createBoardComment">,
+    IMutationCreateBoardCommentArgs
+  >(CREATE_BOARD_COMMENT);
 
-  const onChangeWriter = (event) => {
+  const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
     setWriter(event.target.value);
   };
 
-  const onChangePassword = (event) => {
+  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
   };
-  const onChangeContents = (event) => {
+  const onChangeContents = (event: ChangeEvent<HTMLInputElement>) => {
     setContents(event.target.value);
   };
 
   const onClickWrite = async () => {
+    if (typeof router.query.boardId !== "string") {
+      alert("올바르지 않은 게시글 아이디입니다.");
+      return;
+    }
+
     try {
       await createBoardComment({
         variables: {
@@ -46,7 +58,7 @@ export default function BoarCommentWrite() {
         ],
       });
     } catch (error) {
-      alert(error.message);
+      if (error instanceof Error) alert(error.message);
     }
   };
 

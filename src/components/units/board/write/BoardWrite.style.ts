@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-
+import { ISubmitButtonProps } from "./BoardWrite.type";
 export const Wrapper = styled.div`
   width: 1200px;
   /* height: 1847px; */
@@ -164,8 +164,7 @@ export const SubmitButton = styled.button`
   margin-left: 12px;
   margin-right: 12px;
   background-color: yellow;
-
-  :hover {
-    cursor: pointer;
-  }
+  cursor: pointer;
+  background-color: ${(props: ISubmitButtonProps) =>
+    props.isActive ? "yellow" : "none"};
 `;

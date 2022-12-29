@@ -1,6 +1,7 @@
 import { getMyDate } from "../../../commons/utils/utils";
 import * as t from "./BoardList.style";
-export default function BoardListUI(props) {
+import { IBoardListUIProps } from "./BoardList.type";
+export default function BoardListUI(props: IBoardListUIProps) {
   return (
     <>
       <t.Container>
@@ -21,7 +22,7 @@ export default function BoardListUI(props) {
           </t.Wrapper>
         ))}
       </t.Container>
-      <button onClick={props.onClickMoveToBoard}>게시글등록</button>
+      <button onClick={props.onClickMoveToBoardNew}>게시글등록</button>
     </>
   );
 }

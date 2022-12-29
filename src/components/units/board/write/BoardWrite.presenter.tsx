@@ -1,5 +1,5 @@
 import * as t from "./BoardWrite.style";
-
+import { IBoardWriteUIProps } from "./BoardWrite.type";
 // interface IProps{
 //알트 + 컨트롤 + 방향키아래 = 다중글쓰기 =====중요
 //컨트롤 쉬프트 오른쪽 특정복사 ============중요
@@ -18,7 +18,7 @@ import * as t from "./BoardWrite.style";
 // data: any
 //}
 
-export default function BoardWriteUI(props) {
+export default function BoardWriteUI(props: IBoardWriteUIProps) {
   return (
     <t.Wrapper>
       <t.Title> {props.isEdit ? "수정하기" : "등록하기"}</t.Title>
@@ -35,7 +35,7 @@ export default function BoardWriteUI(props) {
               defaultValue={props.data?.fetchBoard.writer}
             />
           )}
-          <div>{props.WriteError}</div>
+          <div>{props.writerError}</div>
         </t.InputWrapper>
         <t.InputWrapper>
           <t.Label>비밀번호</t.Label>
@@ -64,7 +64,7 @@ export default function BoardWriteUI(props) {
           onChange={props.onChangeContents}
           defaultValue={props.data?.fetchBoard.contents}
         />
-        <div>{props.ContentsError}</div>
+        <div>{props.contentsError}</div>
       </t.InputWrapper>
       <t.InputWrapper>
         <t.Label>주소</t.Label>

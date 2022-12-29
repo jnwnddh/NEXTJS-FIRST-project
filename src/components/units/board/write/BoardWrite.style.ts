@@ -168,3 +168,8 @@ export const SubmitButton = styled.button`
   background-color: ${(props: ISubmitButtonProps) =>
     props.isActive ? "yellow" : "none"};
 `;
+export const Error = styled.div`
+  padding-top: 10px;
+  font-size: 14px;
+  color: red;
+`;

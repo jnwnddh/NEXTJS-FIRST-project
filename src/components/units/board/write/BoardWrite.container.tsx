@@ -3,13 +3,12 @@ import { useRouter } from "next/router";
 import { ChangeEvent, useState } from "react";
 import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.query";
 import BoardWriteUI from "./BoardWrite.presenter";
+import { IBoardWriteProps, IUpdateBoardInput } from "./BoardWrite.type";
 import {
   IMutation,
   IMutationCreateBoardArgs,
   IMutationUpdateBoardArgs,
-  IUpdateBoardInput,
 } from "../../../../commons/types/generated/types";
-import { IBoardWriteProps } from "./BoardWrite.type";
 
 export default function BoardWrite(props: IBoardWriteProps) {
   //나중에 props타입으로바꿀때 interface IProps{

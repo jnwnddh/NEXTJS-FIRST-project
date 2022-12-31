@@ -6,7 +6,11 @@ export default function BoardCommentListUI(props: IBoardCommentListUIProps) {
   return (
     <div>
       {props.isOpenDeleteModal && (
-        <S.PasswordModal open={true} onOk={props.onClickDelete}>
+        <S.PasswordModal
+          open={true}
+          onOk={props.onClickDelete}
+          onCancel={props.closeModal}
+        >
           <div>비밀번호 입력: </div>
           <S.PasswordInput
             type="password"

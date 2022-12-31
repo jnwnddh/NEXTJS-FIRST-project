@@ -15,6 +15,7 @@ import {
   IQuery,
   IQueryFetchBoardArgs,
 } from "../../../../commons/types/generated/types";
+
 export default function BoardDetail() {
   const [deleteBoard] = useMutation<
     Pick<IMutation, "deleteBoard">,

@@ -1,36 +1,42 @@
-import { getMyDate } from "../../../commons/utils/utils";
-import { PasswordInput, PasswordModal, Star } from "./BoardCommentList.styles";
+import { getMyDate } from "../../../../components/commons/utils/utils";
+import * as S from "./BoardCommentList.styles";
 import { IBoardCommentListUIProps } from "./BoardCommentList.type";
 
 export default function BoardCommentListUI(props: IBoardCommentListUIProps) {
-  console.log(props?.data?.fetchBoardComments);
   return (
     <div>
       {props.isOpenDeleteModal && (
-        <PasswordModal visible={true} onOk={props.onClickDelete}>
-          <div>비번입력</div>
-          <PasswordInput
+        <S.PasswordModal open={true} onOk={props.onClickDelete}>
+          <div>비밀번호 입력: </div>
+          <S.PasswordInput
             type="password"
             onChange={props.onChangeDeletePassword}
           />
-        </PasswordModal>
+        </S.PasswordModal>
       )}
-
-      {props.data?.fetchBoardComments?.map((el, _id) => {
-        return (
-          <div key={el._id}>
-            <div>작성자:{el.writer}</div>
-            <div>내용:{el.contents}</div>
-            <Star value={el.rating} disabled />
-            <div>{getMyDate(el?.createdAt)}</div>
-            <button id={el._id} onClick={props.onClickDelete}>
-              삭제
-            </button>
-          </div>
-        );
-      })}
+      {props.data?.fetchBoardComments.map((el) => (
+        <S.ItemWrapper key={el._id}>
+          <S.FlexWrapper>
+            <S.Avatar src="/images/avatar.png" />
+            <S.MainWrapper>
+              <S.WriterWrapper>
+                <S.Writer>{el.writer}</S.Writer>
+                <S.Star value={el.rating} disabled />
+              </S.WriterWrapper>
+              <S.Contents>{el.contents}</S.Contents>
+            </S.MainWrapper>
+            <S.OptionWrapper>
+              <S.UpdateIcon src="/images/boardComment/list/option_update_icon.png/" />
+              <S.DeleteIcon
+                id={el._id}
+                src="/images/boardComment/list/option_delete_icon.png/"
+                onClick={props.onClickOpenDeleteModal}
+              />
+            </S.OptionWrapper>
+          </S.FlexWrapper>
+          <S.DateString>{getMyDate(el?.createdAt)}</S.DateString>
+        </S.ItemWrapper>
+      ))}
     </div>
   );
 }
-
-export const BoardCard = () => {};

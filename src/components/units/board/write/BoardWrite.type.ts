@@ -1,20 +1,26 @@
 import { ChangeEvent } from "react";
 import { IQuery } from "../../../../commons/types/generated/types";
-//작성타입명시
+
 export interface IBoardWriteProps {
   isEdit: boolean;
   data?: Pick<IQuery, "fetchBoard">;
 }
-//업데이트타입명시
+
 export interface IUpdateBoardInput {
   title?: string;
   contents?: string;
+  youtubeUrl?: string;
+  boardAddress?: {
+    zipcode?: string;
+    address?: string;
+    addressDetail?: string;
+  };
 }
-//버튼타입명시
+
 export interface ISubmitButtonProps {
   isActive: boolean;
 }
-//프롭스로넘길때타입명시
+
 export interface IBoardWriteUIProps {
   isActive: boolean;
   writerError: string;
@@ -25,8 +31,16 @@ export interface IBoardWriteUIProps {
   onChangePassword: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeTitle: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeContents: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+  onChangeYoutubeUrl: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChangeAddressDetail: (event: ChangeEvent<HTMLInputElement>) => void;
+  onClickAddressSearch: () => void;
+  onCompleteAddressSearch: (data: any) => void;
   onClickSubmit: () => void;
   onClickUpdate: () => void;
   isEdit: boolean;
   data?: Pick<IQuery, "fetchBoard">;
+  isOpen: boolean;
+  zipcode: string;
+  address: string;
+  addressDetail: string;
 }

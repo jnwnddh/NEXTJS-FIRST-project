@@ -102,6 +102,10 @@ export default function BoardWrite(props: IBoardWriteProps) {
   const onClickAddressSearch = () => {
     setIsOpen(true);
   };
+  const handelCancel = () => {
+    console.log("click");
+    setIsOpen(false);
+  };
 
   const onCompleteAddressSearch = (data: any) => {
     setAddress(data.address);
@@ -214,6 +218,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
       isEdit={props.isEdit}
       data={props.data}
       isOpen={isOpen}
+      handelCancel={handelCancel}
       zipcode={zipcode}
       address={address}
       addressDetail={addressDetail}

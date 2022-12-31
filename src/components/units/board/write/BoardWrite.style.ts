@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 import { Modal } from "antd";
 import { ISubmitButtonProps } from "./BoardWrite.type";
-//다음포스트 라이브러리
 import DaumPostcode from "react-daum-postcode";
 
 export const Wrapper = styled.div`

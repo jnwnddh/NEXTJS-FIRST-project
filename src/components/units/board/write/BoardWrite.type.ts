@@ -40,6 +40,7 @@ export interface IBoardWriteUIProps {
   isEdit: boolean;
   data?: Pick<IQuery, "fetchBoard">;
   isOpen: boolean;
+  handelCancel: () => void;
   zipcode: string;
   address: string;
   addressDetail: string;

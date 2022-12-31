@@ -5,7 +5,7 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
   return (
     <>
       {props.isOpen && (
-        <S.AddressModal visible={true}>
+        <S.AddressModal visible={true} onCancel={props.handelCancel}>
           <S.AddressSearchInput onComplete={props.onCompleteAddressSearch} />
         </S.AddressModal>
       )}

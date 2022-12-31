@@ -36,13 +36,13 @@ export default function BoardCommentList() {
     variables: { boardId: String(router.query.boardId) },
   });
 
-  const onClickDelete = async (event: MouseEvent<HTMLButtonElement>) => {
-    const myPassword = prompt("비밀번호를 입력하세요.");
+  const onClickDelete = async (event: MouseEvent<HTMLElement>) => {
+    if (!(event.target instanceof HTMLElement)) return;
     try {
       await deleteBoardComment({
         variables: {
           password: myPassword,
-          boardCommentId: event.currentTarget.id,
+          boardCommentId: myBoardCommentId,
         },
         refetchQueries: [
           {
@@ -51,6 +51,7 @@ export default function BoardCommentList() {
           },
         ],
       });
+      setIsOpenDeleteModal(false);
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }
@@ -65,12 +66,15 @@ export default function BoardCommentList() {
   const onChangeDeletePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setMyPassword(event.target.value);
   };
+  const closeModal = () => {
+    setIsOpenDeleteModal(false);
+  };
 
   return (
     <BoardCommentListUI
       data={data}
-      onClickDelete={onClickDelete}
       isOpenDeleteModal={isOpenDeleteModal}
+      onClickDelete={onClickDelete}
       onClickOpenDeleteModal={onClickOpenDeleteModal}
       onChangeDeletePassword={onChangeDeletePassword}
     />

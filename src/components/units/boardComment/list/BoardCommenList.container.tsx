@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
-import { MouseEvent } from "react";
+import { ChangeEvent, MouseEvent, useState } from "react";
 import {
   IMutation,
   IMutationDeleteBoardCommentArgs,
@@ -20,6 +20,10 @@ export default function BoardCommentList() {
   //   void router.push("/");
   //   return <></>;
   // }
+  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+  const [myBoardCommentId, setMyBoardCommentId] = useState("");
+  const [myPassword, setMyPassword] = useState("");
+
   const [deleteBoardComment] = useMutation<
     Pick<IMutation, "deleteBoardComment">,
     IMutationDeleteBoardCommentArgs
@@ -52,5 +56,23 @@ export default function BoardCommentList() {
     }
   };
 
-  return <BoardCommentListUI data={data} onClickDelete={onClickDelete} />;
+  const onClickOpenDeleteModal = (event: MouseEvent<HTMLImageElement>) => {
+    if (!(event.target instanceof HTMLImageElement)) return;
+    setMyBoardCommentId(event.target.id);
+    setIsOpenDeleteModal(true);
+  };
+
+  const onChangeDeletePassword = (event: ChangeEvent<HTMLInputElement>) => {
+    setMyPassword(event.target.value);
+  };
+
+  return (
+    <BoardCommentListUI
+      data={data}
+      onClickDelete={onClickDelete}
+      isOpenDeleteModal={isOpenDeleteModal}
+      onClickOpenDeleteModal={onClickOpenDeleteModal}
+      onChangeDeletePassword={onChangeDeletePassword}
+    />
+  );
 }

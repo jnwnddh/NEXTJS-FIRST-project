@@ -1,3 +1,4 @@
+import { Star } from "./BoardCommentWrite.styles";
 import { IBoardCommentWriteUIProps } from "./BoardCommentWrite.type";
 
 export default function BoardCommentWriteUI(props: IBoardCommentWriteUIProps) {
@@ -21,6 +22,7 @@ export default function BoardCommentWriteUI(props: IBoardCommentWriteUIProps) {
         onChange={props.onChangeContents}
         value={props.contents}
       />
+      <Star onChange={props.setStar} />
       <div>{props.contents.length}/100</div>
       <button onClick={props.onClickWrite}>등록하기</button>
     </div>

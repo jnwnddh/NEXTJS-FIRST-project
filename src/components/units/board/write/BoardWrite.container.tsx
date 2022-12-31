@@ -1,25 +1,31 @@
+import { ChangeEvent, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
-import { ChangeEvent, useState } from "react";
-import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.query";
 import BoardWriteUI from "./BoardWrite.presenter";
+import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.query";
 import { IBoardWriteProps, IUpdateBoardInput } from "./BoardWrite.type";
 import {
   IMutation,
   IMutationCreateBoardArgs,
   IMutationUpdateBoardArgs,
 } from "../../../../commons/types/generated/types";
+import { Modal } from "antd";
 
 export default function BoardWrite(props: IBoardWriteProps) {
-  //나중에 props타입으로바꿀때 interface IProps{
-  //isEdit:isEdit=프롭스로받아온것 boolean=데이터의타입
-  //data?: data?=있을수도잇고없을수도잇다any
-  //}
+  const router = useRouter();
+  const [isActive, setIsActive] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
-  const [writeError, setWriteError] = useState("");
+  const [youtubeUrl, setYoutubeUrl] = useState("");
+  const [zipcode, setZipcode] = useState("");
+  const [address, setAddress] = useState("");
+  const [addressDetail, setAddressDetail] = useState("");
+
+  const [writerError, setWriterError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [titleError, setTitleError] = useState("");
   const [contentsError, setContentsError] = useState("");
@@ -33,64 +39,85 @@ export default function BoardWrite(props: IBoardWriteProps) {
     IMutationUpdateBoardArgs
   >(UPDATE_BOARD);
 
-  const router = useRouter();
-  const [isActive, setIsActive] = useState(false);
-
-  //e:ChangeEvent<HTMLInputElement>인풋창에서체인지발생할때발생되는이벤트 =>타입설정리액트에서만듬
-  const onChangeWriter = (e: ChangeEvent<HTMLInputElement>) => {
-    setWriter(e.target.value);
-    if (e.target.value !== "") {
-      setWriteError("");
+  const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
+    setWriter(event.target.value);
+    if (event.target.value !== "") {
+      setWriterError("");
     }
-    if (e.target.value && password && title && contents) {
+
+    if (event.target.value && password && title && contents) {
       setIsActive(true);
     } else {
       setIsActive(false);
     }
   };
-  const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-    if (e.target.value !== "") {
+
+  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
+    setPassword(event.target.value);
+    if (event.target.value !== "") {
       setPasswordError("");
     }
-    if (e.target.value && password && title && contents) {
+
+    if (writer && event.target.value && title && contents) {
       setIsActive(true);
     } else {
       setIsActive(false);
     }
   };
-  const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
-    setTitle(e.target.value);
-    if (e.target.value !== "") {
+
+  const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
+    setTitle(event.target.value);
+    if (event.target.value !== "") {
       setTitleError("");
     }
-    if (e.target.value && password && title && contents) {
+
+    if (writer && password && event.target.value && contents) {
       setIsActive(true);
     } else {
       setIsActive(false);
     }
   };
-  const onChangeContents = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setContents(e.target.value);
-    if (e.target.value !== "") {
+
+  const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setContents(event.target.value);
+    if (event.target.value !== "") {
       setContentsError("");
     }
-    if (e.target.value && password && title && contents) {
+
+    if (writer && password && title && event.target.value) {
       setIsActive(true);
     } else {
       setIsActive(false);
     }
+  };
+
+  const onChangeYoutubeUrl = (event: ChangeEvent<HTMLInputElement>) => {
+    setYoutubeUrl(event.target.value);
+  };
+
+  const onChangeAddressDetail = (event: ChangeEvent<HTMLInputElement>) => {
+    setAddressDetail(event.target.value);
+  };
+
+  const onClickAddressSearch = () => {
+    setIsOpen(true);
+  };
+
+  const onCompleteAddressSearch = (data: any) => {
+    setAddress(data.address);
+    setZipcode(data.zonecode);
+    setIsOpen(false);
   };
 
   const onClickSubmit = async () => {
     if (!writer) {
-      setWriteError("작성자를입력해주세요");
+      setWriterError("작성자를 입력해주세요.");
     }
     if (!password) {
-      setPasswordError("비밀번호를 입력해주세요");
+      setPasswordError("비밀번호를 입력해주세요.");
     }
     if (!title) {
-      setTitleError("제목을 입력해주세요");
+      setTitleError("제목을 입력해주세요.");
     }
     if (!contents) {
       setContentsError("내용을 입력해주세요.");
@@ -104,53 +131,73 @@ export default function BoardWrite(props: IBoardWriteProps) {
               password,
               title,
               contents,
+              youtubeUrl,
+              //우편주소
+              boardAddress: {
+                zipcode,
+                address,
+                addressDetail,
+              },
             },
           },
         });
-
-        alert("등록완료");
-        router.push(`/boards/${result.data.createBoard._id}`);
+        console.log(result.data?.createBoard._id);
+        void router.push(`/boards/${result.data?.createBoard._id}`);
       } catch (error) {
-        alert(error.message);
+        if (error instanceof Error) Modal.error({ content: error.message });
       }
     }
   };
+
   const onClickUpdate = async () => {
-    if (typeof router.query.boardId !== "string") return;
-    // interface IMYvariables{
-    //   number:number
-    //   writer?:string
-    //   title?:string
-    //   contents?:string
-    // }
-    // myVariables: IMYvariables 이런식으로 적용
-    const myVariables: IUpdateBoardInput = {};
-    if (title !== "") {
-      myVariables.title = title;
+    if (
+      !title &&
+      !contents &&
+      !youtubeUrl &&
+      !address &&
+      !addressDetail &&
+      !zipcode
+    ) {
+      alert("수정한 내용이 없습니다.");
+      return;
     }
-    if (contents !== "") {
-      myVariables.contents = contents;
+
+    if (!password) {
+      alert("비밀번호를 입력해주세요.");
+      return;
     }
-    // if (password !== "") myVariables.password = password;
+
+    const updateBoardInput: IUpdateBoardInput = {};
+    if (title) updateBoardInput.title = title;
+    if (contents) updateBoardInput.contents = contents;
+    if (youtubeUrl) updateBoardInput.youtubeUrl = youtubeUrl;
+    if (zipcode || address || addressDetail) {
+      updateBoardInput.boardAddress = {};
+      if (zipcode) updateBoardInput.boardAddress.zipcode = zipcode;
+      if (address) updateBoardInput.boardAddress.address = address;
+      if (addressDetail)
+        updateBoardInput.boardAddress.addressDetail = addressDetail;
+    }
+
     try {
+      if (typeof router.query.boardId !== "string") return;
       const result = await updateBoard({
         variables: {
           boardId: router.query.boardId,
           password: password,
-          updateBoardInput: myVariables,
+          updateBoardInput: updateBoardInput,
         },
       });
-      alert("수정완료");
-      void router.push(`/boards/${result.data?.updateBoard._id ?? ""}`);
+      void router.push(`/boards/${result.data?.updateBoard._id}`);
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }
   };
+
   return (
     <BoardWriteUI
       isActive={isActive}
-      isEdit={props.isEdit}
-      writerError={writeError}
+      writerError={writerError}
       passwordError={passwordError}
       titleError={titleError}
       contentsError={contentsError}
@@ -158,9 +205,18 @@ export default function BoardWrite(props: IBoardWriteProps) {
       onChangePassword={onChangePassword}
       onChangeTitle={onChangeTitle}
       onChangeContents={onChangeContents}
+      onChangeYoutubeUrl={onChangeYoutubeUrl}
+      onChangeAddressDetail={onChangeAddressDetail}
+      onClickAddressSearch={onClickAddressSearch}
+      onCompleteAddressSearch={onCompleteAddressSearch}
       onClickSubmit={onClickSubmit}
       onClickUpdate={onClickUpdate}
+      isEdit={props.isEdit}
       data={props.data}
+      isOpen={isOpen}
+      zipcode={zipcode}
+      address={address}
+      addressDetail={addressDetail}
     />
   );
 }

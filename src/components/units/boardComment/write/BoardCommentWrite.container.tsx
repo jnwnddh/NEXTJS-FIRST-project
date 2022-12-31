@@ -14,6 +14,7 @@ export default function BoarCommentWrite() {
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [contents, setContents] = useState("");
+  const [star, setStar] = useState(0);
 
   const [createBoardComment] = useMutation<
     Pick<IMutation, "createBoardComment">,
@@ -44,7 +45,7 @@ export default function BoarCommentWrite() {
             writer: writer,
             password: password,
             contents: contents,
-            rating: 0,
+            rating: star,
             //별점
           },
           boardId: String(router.query.boardId),
@@ -75,6 +76,7 @@ export default function BoarCommentWrite() {
       writer={writer}
       password={password}
       contents={contents}
+      setStar={setStar}
     />
   );
 }

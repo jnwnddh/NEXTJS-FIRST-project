@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
 //프롭스넘길때타입명시
 export interface IBoardCommentWriteUIProps {
   onChangeWriter: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -8,4 +8,5 @@ export interface IBoardCommentWriteUIProps {
   writer: string;
   contents: string;
   password: string;
+  setStar: Dispatch<SetStateAction<number>>;
 }

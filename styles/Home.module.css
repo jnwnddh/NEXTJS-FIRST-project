@@ -4,7 +4,7 @@
 
 .herosection {
   align-items: center;
-  background-image: linear-gradient(15deg, #f7d3d3 0%, #2a6973 150%);
+  background-image: linear-gradient(15deg, #f7d3d3 0%, #89b3ba 150%);
   display: flex;
   min-height: 100%;
   justify-content: center;
@@ -92,6 +92,9 @@
 }
 
 .cardcategory {
+  position: relative;
+  right: 10px;
+  top: 10px;
   color: white;
   opacity: 0.5;
   font-size: 0.9rem;

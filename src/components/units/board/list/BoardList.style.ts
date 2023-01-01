@@ -1,8 +1,10 @@
 import styled from "@emotion/styled";
 
 export const Container = styled.div`
-border: 1px solid red;
-`
+  border: 1px solid red;
+  width: 1000px;
+  margin: 20px;
+`;
 export const Wrapper = styled.div`
   border: 1px solid black;
   display: flex;
@@ -11,5 +13,4 @@ export const Wrapper = styled.div`
 export const Titles = styled.div`
   display: flex;
   justify-content: space-between;
- 
 `;

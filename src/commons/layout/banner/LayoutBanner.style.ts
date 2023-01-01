@@ -1,50 +1,58 @@
 import styled from "@emotion/styled";
 
+export const Container = styled.div`
+  height: 100%;
+`;
 export const Herosection = styled.div`
   align-items: center;
-  background-image: linear-gradient(15deg, #f7d3d3 0%, #2a6973 150%);
+  background-image: linear-gradient(15deg, #f7d3d3 0%, #89b3ba 150%);
   display: flex;
   min-height: 100%;
   justify-content: center;
   padding: var(--spacing-xxl) var(--spacing-l);
 `;
 
-export const CardGrid = styled.div`
+export const Cardgrid = styled.div`
+  width: 200px;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   align-items: center;
   justify-content: center;
   position: relative;
-  left: 200px;
+  left: 0px;
   grid-column-gap: var(--spacing-l);
   grid-row-gap: var(--spacing-l);
   max-width: var(--width-container);
   width: 100%;
-  .card-grid:hover > .card:not(:hover) .card__background {
-    filter: brightness(0.5) saturate(0) contrast(1.2) blur(20px);
-  }
+  display: flex;
+  height: 550px;
 `;
 
 export const Card = styled.a`
   list-style: none;
   position: relative;
-  .card:before {
+  width: 281px;
+  margin: 10px;
+  display: flex;
+  transition: 1s;
+
+  :before {
     content: "";
     display: block;
     padding-bottom: 150%;
     width: 100%;
   }
-  .card:hover .card__background {
+  :not(:hover) {
     transform: scale(1.05) translateZ(0);
+    transition: 1s;
   }
 `;
 
-export const CardBackGreound = styled.img`
+export const Cardbackground = styled.img`
   background-size: cover;
   background-position: center;
   border-radius: var(--spacing-l);
   bottom: 0;
-  filter: brightness(0.75) saturate(1.2) contrast(0.85);
   left: 0;
   position: absolute;
   right: 0;
@@ -52,33 +60,53 @@ export const CardBackGreound = styled.img`
   transform-origin: center;
   trsnsform: scale(1) translateZ(0);
   transition: filter 200ms linear, transform 200ms linear;
+  margin: 10px;
+  width: 281px;
+  height: 420px;
+  left: -10px;
+  top: -10px;
+  border-radius: 10px;
+  :not(:hover) {
+    filter: brightness(0.4) saturate(1) contrast(1);
+  }
 `;
 
-export const CardContent = styled.div`
+export const Cardcontent = styled.div`
   left: 0;
   padding: var(--spacing-l);
+  height: 50px;
   position: absolute;
   top: 0;
 `;
 
-export const CardCategory = styled.p`
-  color: var(--text-light);
+export const Cardcategory = styled.p`
+  position: relative;
+  right: 10px;
+  top: 10px;
+  color: white;
+  opacity: 0.5;
   font-size: 0.9rem;
-  margin-bottom: var(--spacing-s);
+  text-align: center;
   text-transform: uppercase;
 `;
 
-export const CardHeading = styled.h3`
-  color: var(--text-lighter);
+export const Cardheading = styled.h3`
+  color: white;
   font-size: 1.9rem;
   text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.2);
   line-height: 1.4;
   word-spacing: 100vw;
-
   text-align: center;
   justify-content: center;
   align-items: center;
   position: relative;
-  left: 45px;
-  top: 85px;
+  left: 8px;
+  top: -10px;
+
+  /* :not(:hover) {
+    filter: brightness(1) saturate(1) contrast(1);
+  } */
+  hover: {
+    filter: brightness(1) saturate(1) contrast(1);
+  }
 `;

@@ -23,7 +23,7 @@
   grid-row-gap: var(--spacing-l);
   max-width: var(--width-container);
   width: 100%;
-  border: 1px solid red;
+
   display: flex;
   height: 550px;
 }

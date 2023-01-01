@@ -77,6 +77,7 @@ export default function BoardCommentList() {
       onClickDelete={onClickDelete}
       onClickOpenDeleteModal={onClickOpenDeleteModal}
       onChangeDeletePassword={onChangeDeletePassword}
+      closeModal={closeModal}
     />
   );
 }

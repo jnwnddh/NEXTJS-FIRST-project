@@ -2,6 +2,10 @@ import styled from "@emotion/styled";
 
 export const Container = styled.div`
   height: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin: 10px;
 `;
 export const Herosection = styled.div`
   align-items: center;
@@ -10,6 +14,9 @@ export const Herosection = styled.div`
   min-height: 100%;
   justify-content: center;
   padding: var(--spacing-xxl) var(--spacing-l);
+  width: 1600px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  border-radius: 10px;
 `;
 
 export const Cardgrid = styled.div`
@@ -32,10 +39,9 @@ export const Card = styled.a`
   list-style: none;
   position: relative;
   width: 281px;
-  margin: 10px;
+  margin: 20px;
   display: flex;
   transition: 1s;
-
   :before {
     content: "";
     display: block;
@@ -67,7 +73,7 @@ export const Cardbackground = styled.img`
   top: -10px;
   border-radius: 10px;
   :not(:hover) {
-    filter: brightness(0.4) saturate(1) contrast(1);
+    filter: brightness(0.5) saturate(1) contrast(1.5);
   }
 `;
 
@@ -106,7 +112,7 @@ export const Cardheading = styled.h3`
   /* :not(:hover) {
     filter: brightness(1) saturate(1) contrast(1);
   } */
-  hover: {
+  /* hover: {
     filter: brightness(1) saturate(1) contrast(1);
-  }
+  } */
 `;

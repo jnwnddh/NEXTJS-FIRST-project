@@ -1,44 +1,38 @@
 import { getMyDate } from "../../../commons/utils/utils";
-import * as t from "./BoardList.style";
+import * as S from "./BoardList.style";
 import { IBoardListUIProps } from "./BoardList.type";
+// import Paginations01 from "../../../commons/paginations/01/Paginations01.container";
+
 export default function BoardListUI(props: IBoardListUIProps) {
   return (
-    <t.Dropshadow>
-      {props.data?.fetchBoards.map((el) => (
-        <t.Container>
-          <t.Wrapper key={el._id}>
-            <t.Id>{String(el._id).slice(-4).toUpperCase()}</t.Id>
-            <t.WriterWrapper>
-              <t.Writer>닉네임:{el.writer}</t.Writer>
-            </t.WriterWrapper>
-            <t.Title id={el._id} onClick={props.onClickMoveToBoardDetail}>
-              {el.title}
-            </t.Title>
-            <t.Date>{getMyDate(el.createdAt)}</t.Date>
-          </t.Wrapper>
-        </t.Container>
+    <S.Wrapper>
+      <S.TableTop />
+      <S.Row>
+        <S.ColumnHeaderBasic>ID</S.ColumnHeaderBasic>
+        <S.ColumnHeaderTitle>제목</S.ColumnHeaderTitle>
+        <S.ColumnHeaderBasic>작성자</S.ColumnHeaderBasic>
+        <S.ColumnHeaderBasic>날짜</S.ColumnHeaderBasic>
+      </S.Row>
+      {props.data?.fetchBoards.map((el, index) => (
+        <S.Row key={el._id}>
+          <S.ColumnBasic>
+            {String(el._id).slice(-4).toUpperCase()}
+          </S.ColumnBasic>
+          <S.ColumnTitle id={el._id} onClick={props.onClickMoveToBoardDetail}>
+            {el.title}
+          </S.ColumnTitle>
+          <S.ColumnBasic>{el.writer}</S.ColumnBasic>
+          <S.ColumnBasic>{getMyDate(el.createdAt)}</S.ColumnBasic>
+        </S.Row>
       ))}
-    </t.Dropshadow>
+      <S.TableBottom />
+      <S.Footer>
+        {/* <Paginations01 refetch={props.refetch} count={props.count} /> */}
+        <S.Button onClick={props.onClickMoveToBoardNew}>
+          <S.PencilIcon src="/images/board/list/write.png" />
+          게시물 등록하기
+        </S.Button>
+      </S.Footer>
+    </S.Wrapper>
   );
 }
-//  <t.Texts>asdasd</t.Texts>;
-//
-//  <t.Container>
-//         <t.Titles>
-//           <div>아이디</div>
-//           <div>닉네임</div>
-//           <div>제목</div>
-//           <div>날짜</div>
-//         </t.Titles>
-//         {props.data?.fetchBoards.map((el) => (
-//           <t.Wrapper key={el._id}>
-//             <div>{String(el._id).slice(-4).toUpperCase()}</div>
-//             <div>{el.writer}</div>
-//             <div id={el._id} onClick={props.onClickMoveToBoardDetail}>
-//               {el.title}
-//             </div>
-//             <div>{getMyDate(el.createdAt)}</div>
-//           </t.Wrapper>
-//         ))}
-//       </t.Container>
-//       <button onClick={props.onClickMoveToBoardNew}>게시글등록</button>

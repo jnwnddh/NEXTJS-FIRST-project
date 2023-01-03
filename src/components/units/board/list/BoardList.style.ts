@@ -3,8 +3,13 @@ import styled from "@emotion/styled";
 export const Wrapper = styled.div`
   width: 1200px;
   margin: 100px;
+  border-radius: 10px;
 `;
-
+export const WWrapper = styled.div`
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  border-radius: 10px;
+`;
 export const TableTop = styled.div`
   border-top: 2px solid gray;
   margin-top: 20px;
@@ -23,7 +28,7 @@ export const Row = styled.div`
   margin: 10px;
   border-radius: 10px;
   :hover {
-    color: skyblue;
+    color: blue;
   }
 `;
 
@@ -48,7 +53,7 @@ export const ColumnTitle = styled.div`
   cursor: pointer;
 
   :hover {
-    color: skyblue;
+    color: blue;
   }
 `;
 

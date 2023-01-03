@@ -17,6 +17,7 @@ export const Wrapper = styled.div`
   align-items: center;
   border: none;
   box-shadow: 0px 0px 10px gray;
+  background: linear-gradient(90deg, #b9deed, #efefef);
 `;
 
 export const Title = styled.div`

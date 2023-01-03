@@ -9,13 +9,11 @@ export const Container = styled.div`
 `;
 export const Herosection = styled.div`
   align-items: center;
-  background-image: linear-gradient(15deg, #f7d3d3 0%, #89b3ba 150%);
   display: flex;
   min-height: 100%;
   justify-content: center;
   padding: var(--spacing-xxl) var(--spacing-l);
   width: 1600px;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   border-radius: 10px;
 `;
 

@@ -6,7 +6,9 @@ export const ItemWrapper = styled.div`
   margin: 0px 100px;
   padding-top: 20px;
   height: 128px;
-  border-bottom: 1px solid lightgray;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  margin-top: 10px;
+  border-radius: 20px;
 `;
 
 export const FlexWrapper = styled.div`
@@ -50,7 +52,7 @@ export const DeleteIcon = styled.img`
 `;
 
 export const DateString = styled.div`
-  color: lightgray;
+  color: black;
   padding-top: 15px;
   padding-left: 60px;
 `;

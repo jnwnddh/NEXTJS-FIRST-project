@@ -18,6 +18,7 @@ export interface IBoardCommentWriteUIProps {
   contents: string;
   setStar: Dispatch<SetStateAction<number>>;
   isEdit?: boolean;
+  setIsEdit?: any;
   el?: IBoardComment;
 }
 

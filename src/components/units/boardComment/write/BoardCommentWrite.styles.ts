@@ -21,6 +21,7 @@ export const ContentsWrapper = styled.div`
 `;
 
 export const Input = styled.input`
+  border-radius: 20px;
   width: 180px;
   height: 52px;
   padding-left: 20px;

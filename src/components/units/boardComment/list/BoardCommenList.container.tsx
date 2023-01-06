@@ -1,17 +1,11 @@
-import { useMutation, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
-import { ChangeEvent, MouseEvent, useState } from "react";
 import {
-  IMutation,
-  IMutationDeleteBoardCommentArgs,
   IQuery,
   IQueryFetchBoardCommentsArgs,
 } from "../../../../commons/types/generated/types";
 import BoardCommentListUI from "./BoardCommentList.presenter";
-import {
-  DELETE_BOARD_COMMENT,
-  FETCH_BOARD_COMMENTS,
-} from "./BoardCommentList.queries";
+import { FETCH_BOARD_COMMENTS } from "./BoardCommentList.queries";
 
 export default function BoardCommentList() {
   const router = useRouter();
@@ -20,64 +14,31 @@ export default function BoardCommentList() {
   //   void router.push("/");
   //   return <></>;
   // }
-  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
-  const [myBoardCommentId, setMyBoardCommentId] = useState("");
-  const [myPassword, setMyPassword] = useState("");
 
-  const [deleteBoardComment] = useMutation<
-    Pick<IMutation, "deleteBoardComment">,
-    IMutationDeleteBoardCommentArgs
-  >(DELETE_BOARD_COMMENT);
-
-  const { data } = useQuery<
+  const { data, fetchMore } = useQuery<
     Pick<IQuery, "fetchBoardComments">,
     IQueryFetchBoardCommentsArgs
   >(FETCH_BOARD_COMMENTS, {
     variables: { boardId: String(router.query.boardId) },
   });
 
-  const onClickDelete = async (event: MouseEvent<HTMLElement>) => {
-    if (!(event.target instanceof HTMLElement)) return;
-    try {
-      await deleteBoardComment({
-        variables: {
-          password: myPassword,
-          boardCommentId: myBoardCommentId,
-        },
-        refetchQueries: [
-          {
-            query: FETCH_BOARD_COMMENTS,
-            variables: { boardId: router.query.boardId },
-          },
-        ],
-      });
-      setIsOpenDeleteModal(false);
-    } catch (error) {
-      if (error instanceof Error) alert(error.message);
-    }
+  const onLoadMore = () => {
+    if (!data) return;
+
+    void fetchMore({
+      variables: { page: Math.ceil(data?.fetchBoardComments.length / 10) + 1 },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult?.fetchBoardComments)
+          return { fetchBoardComments: [...prev.fetchBoardComments] };
+        return {
+          fetchBoardComments: [
+            ...prev.fetchBoardComments,
+            ...fetchMoreResult.fetchBoardComments,
+          ],
+        };
+      },
+    });
   };
 
-  const onClickOpenDeleteModal = (event: MouseEvent<HTMLImageElement>) => {
-    if (!(event.target instanceof HTMLImageElement)) return;
-    setMyBoardCommentId(event.target.id);
-    setIsOpenDeleteModal(true);
-  };
-  //삭제하기위한패스워드
-  const onChangeDeletePassword = (event: ChangeEvent<HTMLInputElement>) => {
-    setMyPassword(event.target.value);
-  };
-  const closeModal = () => {
-    setIsOpenDeleteModal(false);
-  };
-
-  return (
-    <BoardCommentListUI
-      data={data}
-      isOpenDeleteModal={isOpenDeleteModal}
-      onClickDelete={onClickDelete}
-      onClickOpenDeleteModal={onClickOpenDeleteModal}
-      onChangeDeletePassword={onChangeDeletePassword}
-      closeModal={closeModal}
-    />
-  );
+  return <BoardCommentListUI data={data} onLoadMore={onLoadMore} />;
 }

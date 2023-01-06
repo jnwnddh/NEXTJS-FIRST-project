@@ -1,12 +1,27 @@
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
-//프롭스넘길때타입명시
+import { IBoardComment } from "../../../../commons/types/generated/types";
+
+export interface IBoardCommentWriteProps {
+  isEdit?: boolean;
+  setIsEdit?: Dispatch<SetStateAction<boolean>>;
+  el?: IBoardComment;
+}
+
 export interface IBoardCommentWriteUIProps {
   onChangeWriter: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangePassword: (event: ChangeEvent<HTMLInputElement>) => void;
-  onChangeContents: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChangeContents: (event: ChangeEvent<HTMLTextAreaElement>) => void;
   onClickWrite: () => void;
+  onClickUpdate: () => void;
   writer: string;
-  contents: string;
   password: string;
+  contents: string;
   setStar: Dispatch<SetStateAction<number>>;
+  isEdit?: boolean;
+  el?: IBoardComment;
+}
+
+export interface IUpdateBoardCommentInput {
+  contents?: string;
+  rating?: number;
 }

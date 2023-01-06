@@ -18,6 +18,8 @@ export const CardWrapper = styled.div`
   align-items: center;
   border: none;
   box-shadow: 0px 0px 10px gray;
+  background-color: white;
+  border-radius: 20px;
 `;
 
 export const Header = styled.div`
@@ -74,12 +76,14 @@ export const Button = styled.button`
   width: 179px;
   height: 45px;
   background-color: white;
-  border: 1px solid gray;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  border-radius: 10px;
   margin: 0px 12px;
   cursor: pointer;
 
   :hover {
-    background-color: gold;
+    background-color: skyblue;
     border-color: white;
   }
 `;

@@ -62,7 +62,7 @@ export default function BoardCommentList() {
     setMyBoardCommentId(event.target.id);
     setIsOpenDeleteModal(true);
   };
-
+  //삭제하기위한패스워드
   const onChangeDeletePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setMyPassword(event.target.value);
   };

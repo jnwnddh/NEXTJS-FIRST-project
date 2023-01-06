@@ -37,6 +37,18 @@ export default function BoardDetail() {
   //   void router.push("/");
   //   return <></>;
   // }
+  const onClickMoveToBoardList = () => {
+    void router.push("/boards");
+  };
+
+  const onClickMoveToBoardEdit = () => {
+    if (typeof router.query.boardId !== "string") {
+      return;
+    }
+
+    void router.push(`/boards/${router.query.boardId}/edit`);
+  };
+
   const onClickLike = () => {
     if (typeof router.query.boardId !== "string") return;
     likeBoard({
@@ -85,6 +97,8 @@ export default function BoardDetail() {
       onClickDelete={onClickDelete}
       onClickLike={onClickLike}
       onClickDislike={onClickDislike}
+      onClickMoveToBoardList={onClickMoveToBoardList}
+      onClickMoveToBoardEdit={onClickMoveToBoardEdit}
     />
   );
 }

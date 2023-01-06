@@ -19,6 +19,9 @@ export const FlexWrapper = styled.div`
 export const Avatar = styled.img`
   width: 48px;
   height: 48px;
+  position: relative;
+  left: 25px;
+  bottom: 15px;
 `;
 
 export const MainWrapper = styled.div`
@@ -31,21 +34,34 @@ export const WriterWrapper = styled.div`
   align-items: center;
 `;
 export const Writer = styled.div`
+  position: relative;
+  left: 20px;
+  border: 1px solid red;
   font-size: 20px;
   font-weight: bold;
 `;
-export const Contents = styled.div``;
+export const Contents = styled.div`
+  position: relative;
+  top: 5px;
+  left: 0px;
+`;
 
 export const OptionWrapper = styled.div`
   display: flex;
   flex-direction: row;
 `;
 export const UpdateIcon = styled.img`
+  position: relative;
+  top: 10px;
+  right: 20px;
   width: 24px;
   height: 24px;
   cursor: pointer;
 `;
 export const DeleteIcon = styled.img`
+  position: relative;
+  top: 10px;
+  right: 20px;
   width: 24px;
   height: 24px;
   cursor: pointer;
@@ -59,6 +75,8 @@ export const DateString = styled.div`
 
 export const Star = styled(Rate)`
   padding-left: 20px;
+  position: relative;
+  left: 50px;
 `;
 
 export const PasswordModal = styled(Modal)``;

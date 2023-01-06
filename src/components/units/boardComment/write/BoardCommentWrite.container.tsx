@@ -70,7 +70,6 @@ export default function BoardCommentWrite(props: IBoardCommentWriteProps) {
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }
-
     setWriter("");
     setPassword("");
     setContents("");
@@ -122,6 +121,7 @@ export default function BoardCommentWrite(props: IBoardCommentWriteProps) {
       password={password}
       contents={contents}
       setStar={setStar}
+      setIsEdit={props.setIsEdit}
       isEdit={props.isEdit}
       el={props.el}
     />

@@ -54,11 +54,21 @@ export const ContentsLength = styled.div`
 export const Button = styled.button`
   width: 91px;
   height: 51px;
+  margin: 5px;
   background-color: royalblue;
   border-radius: 10px;
   border: none;
   color: white;
   cursor: pointer;
 `;
-
+export const CanCelButton = styled.button`
+  width: 91px;
+  height: 51px;
+  margin: 5px;
+  background-color: black;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  cursor: pointer;
+`;
 export const Star = styled(Rate)``;

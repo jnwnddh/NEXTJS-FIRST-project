@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
-import * as t from "./LayoutBanner.style";
+import * as t from "./LayoutNavCard.style";
 
-export default function LayoutBannerUI() {
+export default function LayoutNavCardUI() {
   const router = useRouter();
   const noticeboard = () => {
     void router.push("/boards");

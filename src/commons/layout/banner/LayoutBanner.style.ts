@@ -1,117 +1,73 @@
 import styled from "@emotion/styled";
 
 export const Container = styled.div`
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  margin: 10px;
-`;
-export const Herosection = styled.div`
-  align-items: center;
-  display: flex;
-  min-height: 100%;
-  justify-content: center;
-  padding: var(--spacing-xxl) var(--spacing-l);
-  width: 1600px;
-  border-radius: 10px;
-`;
-
-export const Cardgrid = styled.div`
-  width: 200px;
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  left: 0px;
-  grid-column-gap: var(--spacing-l);
-  grid-row-gap: var(--spacing-l);
-  max-width: var(--width-container);
-  width: 100%;
-  display: flex;
-  height: 550px;
-`;
-
-export const Card = styled.div`
-  list-style: none;
-  position: relative;
-  width: 281px;
-  margin: 20px;
-  display: flex;
-  transition: 1s;
-  cursor: pointer;
-  :before {
-    content: "";
-    display: block;
-    padding-bottom: 150%;
-    width: 100%;
-  }
-  :not(:hover) {
-    transform: scale(1.05) translateZ(0);
-    transition: 1s;
-  }
-`;
-
-export const Cardbackground = styled.img`
+  height: 300px;
   background-size: cover;
-  background-position: center;
-  border-radius: var(--spacing-l);
-  bottom: 0;
-  left: 0;
+  margin-top: 10px;
+  border-radius: 20px;
+`;
+
+export const Logo = styled.div`
+  text-align: center;
+  width: 65%;
+  height: 250px;
+  margin: auto;
   position: absolute;
-  right: 0;
   top: 0;
-  transform-origin: center;
-  trsnsform: scale(1) translateZ(0);
-  transition: filter 200ms linear, transform 200ms linear;
-  margin: 10px;
-  width: 281px;
-  height: 420px;
-  left: -10px;
-  top: -10px;
-  border-radius: 10px;
-  :not(:hover) {
-    filter: brightness(0.5) saturate(1) contrast(1.5);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  user-select: none;
+`;
+
+export const Bwrap = styled.b`
+  font-family: "Vibur";
+  font-size: 100px;
+  color: white;
+  text-shadow: 0 -40px 100px, 0 0 2px, 0 0 1em skyblue, 0 0 0.5em skyblue,
+    0 0 0.1em #ff4444, 0 10px 3px #000;
+  position: relative;
+  bottom: 100px;
+  @font-face {
+    font-family: "Vibur";
+    src: url("./Vibur-Regular.ttf") format("ttf");
   }
 `;
-
-export const Cardcontent = styled.div`
-  left: 0;
-  padding: var(--spacing-l);
-  height: 50px;
-  position: absolute;
-  top: 0;
-`;
-
-export const Cardcategory = styled.p`
-  position: relative;
-  right: 10px;
-  top: 10px;
-  color: white;
-  opacity: 0.5;
-  font-size: 0.9rem;
-  text-align: center;
-  text-transform: uppercase;
-`;
-
-export const Cardheading = styled.h3`
-  color: white;
-  font-size: 1.9rem;
-  text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.2);
-  line-height: 1.4;
-  word-spacing: 100vw;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  left: 8px;
-  top: -10px;
-
-  /* :not(:hover) {
-    filter: brightness(1) saturate(1) contrast(1);
-  } */
-  /* hover: {
-    filter: brightness(1) saturate(1) contrast(1);
-  } */
+export const Spans = styled.span`
+  animation: blink linear infinite 2s;
+  :nth-of-type(2) {
+    animation: blink linear infinite 5s;
+  }
+  @keyframes blink {
+    78% {
+      color: inherit;
+      text-shadow: inherit;
+    }
+    79% {
+      color: #333;
+    }
+    80% {
+      text-shadow: none;
+    }
+    81% {
+      color: inherit;
+      text-shadow: inherit;
+    }
+    82% {
+      color: #333;
+      text-shadow: none;
+    }
+    83% {
+      color: inherit;
+      text-shadow: inherit;
+    }
+    92% {
+      color: #333;
+      text-shadow: none;
+    }
+    92.5% {
+      color: inherit;
+      text-shadow: inherit;
+    }
+  }
 `;

@@ -36,7 +36,6 @@ export const WriterWrapper = styled.div`
 export const Writer = styled.div`
   position: relative;
   left: 20px;
-  border: 1px solid red;
   font-size: 20px;
   font-weight: bold;
 `;

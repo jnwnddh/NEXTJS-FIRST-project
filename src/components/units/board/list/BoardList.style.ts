@@ -44,7 +44,7 @@ export const ColumnHeaderTitle = styled.div`
 `;
 
 export const ColumnBasic = styled.div`
-  width: 10%;
+  width: 200px;
   text-align: center;
 `;
 

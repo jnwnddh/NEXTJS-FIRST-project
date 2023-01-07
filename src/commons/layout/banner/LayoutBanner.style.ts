@@ -33,13 +33,14 @@ export const Cardgrid = styled.div`
   height: 550px;
 `;
 
-export const Card = styled.a`
+export const Card = styled.div`
   list-style: none;
   position: relative;
   width: 281px;
   margin: 20px;
   display: flex;
   transition: 1s;
+  cursor: pointer;
   :before {
     content: "";
     display: block;

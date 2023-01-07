@@ -1,6 +1,11 @@
+import { useRouter } from "next/router";
 import * as t from "./LayoutBanner.style";
 
 export default function LayoutBannerUI() {
+  const router = useRouter();
+  const noticeboard = () => {
+    void router.push("/boards");
+  };
   return (
     <t.Container>
       <t.Herosection>
@@ -12,14 +17,14 @@ export default function LayoutBannerUI() {
               <t.Cardheading>마이페이지</t.Cardheading>
             </t.Cardcontent>
           </t.Card>
-          <t.Card href="#">
+          <t.Card>
             <t.Cardbackground src="https://cdn.pixabay.com/photo/2022/11/11/12/25/miniature-shopping-cart-7584887__340.jpg" />
             <t.Cardcontent>
               <t.Cardcategory>Category</t.Cardcategory>
               <t.Cardheading>쇼핑하러가기</t.Cardheading>
             </t.Cardcontent>
           </t.Card>
-          <t.Card href="#">
+          <t.Card onClick={noticeboard}>
             <t.Cardbackground src="https://cdn.pixabay.com/photo/2022/01/25/12/16/laptop-6966045__340.jpg" />
             <t.Cardcontent>
               <t.Cardcategory>Category</t.Cardcategory>

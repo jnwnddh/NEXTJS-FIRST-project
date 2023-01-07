@@ -15,6 +15,7 @@ export interface IUpdateBoardInput {
     address?: string;
     addressDetail?: string;
   };
+  images?: string[];
 }
 
 export interface ISubmitButtonProps {
@@ -35,13 +36,15 @@ export interface IBoardWriteUIProps {
   onChangeAddressDetail: (event: ChangeEvent<HTMLInputElement>) => void;
   onClickAddressSearch: () => void;
   onCompleteAddressSearch: (data: any) => void;
+  onChangeFileUrls: (fileUrls: string, index: number) => void;
   onClickSubmit: () => void;
   onClickUpdate: () => void;
+  handelCancel: () => void;
   isEdit: boolean;
   data?: Pick<IQuery, "fetchBoard">;
   isOpen: boolean;
-  handelCancel: () => void;
   zipcode: string;
   address: string;
   addressDetail: string;
+  fileUrls: string[];
 }

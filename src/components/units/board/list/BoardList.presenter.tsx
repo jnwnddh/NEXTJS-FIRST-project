@@ -1,7 +1,7 @@
 import { getMyDate } from "../../../commons/utils/utils";
 import * as S from "./BoardList.style";
 import { IBoardListUIProps } from "./BoardList.type";
-import Paginations01 from "../../../../commons/pagenation/Pagenation.container";
+import Paginations01 from "../../../commons/pagenation/Pagenation.container";
 
 export default function BoardListUI(props: IBoardListUIProps) {
   return (

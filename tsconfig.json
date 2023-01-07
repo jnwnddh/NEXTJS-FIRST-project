@@ -19,10 +19,11 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/commons/layout/banner/banner.product.jsx",
-    "src/commons/layout/banner/banner.container.jsx",
+    "src/commons/layout/navCard/banner.product.jsx",
+    "src/commons/layout/navCard/banner.container.jsx",
     "src/commons/layout/header/LayoutHeader.presenter.tsx",
-    "src/commons/layout/header/LayoutHeader.style.ts"
+    "src/commons/layout/header/LayoutHeader.style.ts",
+    "src/commons/layout/Banner/LayoutBanner.container.tsx"
   ],
   "exclude": ["node_modules"]
 }

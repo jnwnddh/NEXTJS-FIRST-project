@@ -2,7 +2,14 @@ import styled from "@emotion/styled";
 
 export const Container = styled.div`
   height: 300px;
-  background-size: cover;
+  width: 1000px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  position: relative;
+  margin: 0 auto;
+
+  background: url(https://unsplash.it/1234/740?image=26) center no-repeat;
   margin-top: 10px;
   border-radius: 20px;
 `;
@@ -23,11 +30,11 @@ export const Logo = styled.div`
 export const Bwrap = styled.b`
   font-family: "Vibur";
   font-size: 100px;
-  color: white;
-  text-shadow: 0 -40px 100px, 0 0 2px, 0 0 1em skyblue, 0 0 0.5em skyblue,
-    0 0 0.1em #ff4444, 0 10px 3px #000;
+  color: lightcyan;
+  text-shadow: 0 -40px 100px, 0 0 2px, 0 0 1em #ff4444, 0 0 0.5em skyblue,
+    0 0 0.1em lightcyan, 0 10px 3px #000;
   position: relative;
-  bottom: 100px;
+  top: 50px;
   @font-face {
     font-family: "Vibur";
     src: url("./Vibur-Regular.ttf") format("ttf");

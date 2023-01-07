@@ -1,12 +1,12 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, MouseEvent } from "react";
 import { IQuery } from "../../../../commons/types/generated/types";
 
 export interface IBoardWriteProps {
-  isEdit: boolean;
-  data?: Pick<IQuery, "fetchBoard">;
+  isEdit?: boolean;
+  data?: any;
 }
 
-export interface IUpdateBoardInput {
+export interface IMyUpdateBoardInput {
   title?: string;
   contents?: string;
   youtubeUrl?: string;
@@ -18,33 +18,34 @@ export interface IUpdateBoardInput {
   images?: string[];
 }
 
-export interface ISubmitButtonProps {
-  isActive: boolean;
-}
-
 export interface IBoardWriteUIProps {
-  isActive: boolean;
-  writerError: string;
-  passwordError: string;
-  titleError: string;
-  contentsError: string;
-  onChangeWriter: (event: ChangeEvent<HTMLInputElement>) => void;
-  onChangePassword: (event: ChangeEvent<HTMLInputElement>) => void;
-  onChangeTitle: (event: ChangeEvent<HTMLInputElement>) => void;
-  onChangeContents: (event: ChangeEvent<HTMLTextAreaElement>) => void;
-  onChangeYoutubeUrl: (event: ChangeEvent<HTMLInputElement>) => void;
+  myWriterError: string;
+  myPasswordError: string;
+  myTitleError: string;
+  myContentsError: string;
+  onChangeMyWriter: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChangeMyPassword: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChangeMyTitle: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChangeMyContents: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+  onChangeMyYoutubeUrl: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeAddressDetail: (event: ChangeEvent<HTMLInputElement>) => void;
-  onClickAddressSearch: () => void;
-  onCompleteAddressSearch: (data: any) => void;
-  onChangeFileUrls: (fileUrls: string, index: number) => void;
   onClickSubmit: () => void;
   onClickUpdate: () => void;
   handelCancel: () => void;
-  isEdit: boolean;
-  data?: Pick<IQuery, "fetchBoard">;
+  onClickAddressSearch: () => void;
+  onCompleteAddressSearch: (data: any) => void;
+  onChangeFileUrls: (fileUrls: string, index: number) => void;
+
+  isActive: boolean;
+  isEdit?: boolean;
   isOpen: boolean;
+  data?: Pick<IQuery, "fetchBoard">;
   zipcode: string;
   address: string;
   addressDetail: string;
   fileUrls: string[];
+}
+
+export interface ISubmitButtonProps {
+  isActive: boolean;
 }

@@ -36,7 +36,7 @@ export const Bwrap = styled.b`
 export const Spans = styled.span`
   animation: blink linear infinite 2s;
   :nth-of-type(2) {
-    animation: blink linear infinite 5s;
+    animation: blink linear infinite 3s;
   }
   @keyframes blink {
     78% {

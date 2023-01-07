@@ -1,5 +1,7 @@
 import * as S from "./BoardWrite.style";
 import { IBoardWriteUIProps } from "./BoardWrite.type";
+import { v4 as uuidv4 } from "uuid";
+import Uploads01 from "../../../commons/uploads/01/Uploads01.container";
 
 export default function BoardWriteUI(props: IBoardWriteUIProps) {
   return (
@@ -18,7 +20,7 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
               type="text"
               placeholder="이름을 적어주세요."
               onChange={props.onChangeWriter}
-              defaultValue={props.data?.fetchBoard.writer || ""}
+              defaultValue={props.data?.fetchBoard.writer ?? ""}
               readOnly={!!props.data?.fetchBoard.writer}
             />
             <S.Error>{props.writerError}</S.Error>
@@ -55,15 +57,7 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
         <S.InputWrapper>
           <S.Label>주소</S.Label>
           <S.ZipcodeWrapper>
-            <S.Zipcode
-              placeholder="07250"
-              readOnly
-              value={
-                props.zipcode ||
-                props.data?.fetchBoard.boardAddress?.zipcode ||
-                ""
-              }
-            />
+            <S.Zipcode placeholder="07250" readOnly value={props.zipcode} />
             <S.SearchButton onClick={props.onClickAddressSearch}>
               우편번호 검색
             </S.SearchButton>
@@ -72,14 +66,13 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
             readOnly
             value={
               props.address ||
-              props.data?.fetchBoard.boardAddress?.address ||
-              ""
+              (props.data?.fetchBoard.boardAddress?.address ?? "")
             }
           />
           <S.Address
             onChange={props.onChangeAddressDetail}
             defaultValue={
-              props.data?.fetchBoard.boardAddress?.addressDetail || ""
+              props.data?.fetchBoard.boardAddress?.addressDetail ?? ""
             }
           />
         </S.InputWrapper>
@@ -88,14 +81,19 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
           <S.Youtube
             placeholder="링크를 복사해주세요."
             onChange={props.onChangeYoutubeUrl}
-            defaultValue={props.data?.fetchBoard.youtubeUrl || ""}
+            defaultValue={props.data?.fetchBoard.youtubeUrl ?? ""}
           />
         </S.InputWrapper>
         <S.ImageWrapper>
           <S.Label>사진첨부</S.Label>
-          <S.UploadButton>+</S.UploadButton>
-          <S.UploadButton>+</S.UploadButton>
-          <S.UploadButton>+</S.UploadButton>
+          {props.fileUrls?.map((el, index) => (
+            <Uploads01
+              key={uuidv4()}
+              index={index}
+              fileUrl={el}
+              onChangeFileUrls={props.onChangeFileUrls}
+            />
+          ))}
         </S.ImageWrapper>
         <S.OptionWrapper>
           <S.Label>메인설정</S.Label>

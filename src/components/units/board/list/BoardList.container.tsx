@@ -1,32 +1,40 @@
+import BoardListUI from "./BoardList.presenter";
 import { useQuery } from "@apollo/client";
+import { FETCH_BOARDS, FETCH_BOARDS_COUNT } from "./BoardList.query";
 import { useRouter } from "next/router";
 import {
   IQuery,
   IQueryFetchBoardsArgs,
+  IQueryFetchBoardsCountArgs,
 } from "../../../../commons/types/generated/types";
-import BoardListUI from "./BoardList.presenter";
-import { FETCH_BOARDS } from "./BoardList.query";
 import { MouseEvent } from "react";
+
 export default function BoardList() {
   const router = useRouter();
-  const { data } = useQuery<Pick<IQuery, "fetchBoards">, IQueryFetchBoardsArgs>(
-    FETCH_BOARDS
-  );
+  const { data, refetch } = useQuery<
+    Pick<IQuery, "fetchBoards">,
+    IQueryFetchBoardsArgs
+  >(FETCH_BOARDS);
+  const { data: dataBoardsCount } = useQuery<
+    Pick<IQuery, "fetchBoardsCount">,
+    IQueryFetchBoardsCountArgs
+  >(FETCH_BOARDS_COUNT);
+
   const onClickMoveToBoardNew = () => {
-    router.push("/boards/new");
+    void router.push("/boards/new");
   };
 
   const onClickMoveToBoardDetail = (event: MouseEvent<HTMLDivElement>) => {
-    router.push(`/boards/${event.currentTarget.id}`);
+    void router.push(`/boards/${event.currentTarget.id}`);
   };
-
-  console.log(data);
 
   return (
     <BoardListUI
       data={data}
       onClickMoveToBoardNew={onClickMoveToBoardNew}
       onClickMoveToBoardDetail={onClickMoveToBoardDetail}
+      refetch={refetch}
+      count={dataBoardsCount?.fetchBoardsCount}
     />
   );
 }

@@ -28,7 +28,19 @@ export const InnerLogo = styled.div`
 `;
 
 export const InnerButton = styled.span`
+  background-color: #ffd600;
+  padding: 10px;
+  font-weight: bold;
+  border-radius: 10px;
   margin: 10px;
+  cursor: pointer;
+`;
+export const LoginButton = styled.span`
+  background-color: gray;
+  font-weight: bold;
   color: white;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 10px;
   cursor: pointer;
 `;

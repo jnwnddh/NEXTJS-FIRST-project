@@ -115,6 +115,7 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
         </InputWrapper>
         <ImageWrapper>
           <Label>사진첨부</Label>
+          {/* map돌려서 이미지컴포넌트뿌려주기 */}
           {props.fileUrls.map((el, index) => (
             <Uploads01
               key={uuidv4()}

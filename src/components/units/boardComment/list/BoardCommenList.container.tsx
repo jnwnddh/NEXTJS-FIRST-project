@@ -23,8 +23,9 @@ export default function BoardCommentList() {
   });
 
   const onLoadMore = () => {
+    //데이터없으면끝
     if (!data) return;
-
+    //데이터받아올때 페이지1씩증가
     void fetchMore({
       variables: { page: Math.ceil(data?.fetchBoardComments.length / 10) + 1 },
       updateQuery: (prev, { fetchMoreResult }) => {

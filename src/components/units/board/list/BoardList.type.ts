@@ -1,5 +1,5 @@
+import { ApolloQueryResult, OperationVariables } from "@apollo/client";
 import { MouseEvent } from "react";
-import { ApolloQueryResult } from "@apollo/client";
 import {
   IQuery,
   IQueryFetchBoardsArgs,
@@ -12,7 +12,12 @@ export interface IBoardListUIProps {
   refetch: (
     variables?: Partial<IQueryFetchBoardsArgs> | undefined
   ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchBoards">>>;
+  refetchBoardsCount: (
+    variables: Partial<OperationVariables>
+  ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchBoardsCount">>>;
   count?: number;
+  keyword: string;
+  onChangeKeyword: (value: string) => void;
 }
 
 export interface ITextTokenProps {

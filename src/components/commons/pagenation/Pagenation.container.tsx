@@ -3,7 +3,9 @@ import Paginations01UI from "./Pagenation.presenter";
 import { IPaginations01Props } from "./Pagenation.type";
 
 export default function pagenation(props: IPaginations01Props) {
+  //시작페이지
   const [startPage, setStartPage] = useState(1);
+  //클릭한페이지의데이터값들
   const [activedPage, setActivedPage] = useState(1);
   const lastPage = props.count != null ? Math.ceil(props.count / 10) : 0;
 

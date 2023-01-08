@@ -70,6 +70,7 @@ export default function BoardCommentWrite(props: IBoardCommentWriteProps) {
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }
+    //다쓰고 댓글빈칸
     setWriter("");
     setPassword("");
     setContents("");

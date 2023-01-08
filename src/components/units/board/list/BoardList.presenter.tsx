@@ -8,6 +8,7 @@ import Searchbars01 from "../../../../components/commons/searchbar/Searchbar.con
 export default function BoardListUI(props: IBoardListUIProps) {
   return (
     <S.Wrapper>
+      {/* List container에서프롭스로보내주고 */}
       <Searchbars01
         refetch={props.refetch}
         refetchBoardsCount={props.refetchBoardsCount}

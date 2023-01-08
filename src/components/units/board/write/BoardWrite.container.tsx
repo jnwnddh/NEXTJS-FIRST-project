@@ -7,7 +7,7 @@ import { IBoardWriteProps, IMyUpdateBoardInput } from "./BoardWrite.type";
 
 export default function BoardWrite(props: IBoardWriteProps) {
   const router = useRouter();
-
+  //인풋에 들어갈값들
   const [myWriter, setMyWriter] = useState("");
   const [myPassword, setMyPassword] = useState("");
   const [myTitle, setMyTitle] = useState("");
@@ -17,12 +17,12 @@ export default function BoardWrite(props: IBoardWriteProps) {
   const [address, setAddress] = useState("");
   const [addressDetail, setAddressDetail] = useState("");
   const [fileUrls, setFileUrls] = useState(["", "", ""]);
-
+  //에러메세지
   const [myWriterError, setMyWriterError] = useState("");
   const [myPasswordError, setMyPasswordError] = useState("");
   const [myTitleError, setMyTitleError] = useState("");
   const [myContentsError, setMyContentsError] = useState("");
-
+  //수정,모달창
   const [isActive, setIsActive] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -176,6 +176,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
     if (myTitle) myUpdateboardInput.title = myTitle;
     if (myContents) myUpdateboardInput.contents = myContents;
     if (youtubeUrl) myUpdateboardInput.youtubeUrl = youtubeUrl;
+    //우편번호
     if (zipcode || address || addressDetail) {
       myUpdateboardInput.boardAddress = {};
       if (zipcode) myUpdateboardInput.boardAddress.zipcode = zipcode;
@@ -197,7 +198,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
       alert(error.message);
     }
   }
-
+  //이미지url값
   function onChangeFileUrls(fileUrl: string, index: number) {
     const newFileUrls = [...fileUrls];
     newFileUrls[index] = fileUrl;

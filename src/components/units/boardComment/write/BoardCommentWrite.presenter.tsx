@@ -44,6 +44,7 @@ export default function BoardCommentWriteUI(props: IBoardCommentWriteUIProps) {
           >
             {props.isEdit ? "수정하기" : "등록하기"}
           </S.Button>
+          {/* 수정취소버튼 */}
           {props.isEdit ? (
             <S.CanCelButton
               onClick={() => {

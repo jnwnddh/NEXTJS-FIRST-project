@@ -30,7 +30,7 @@ export default function BoardList() {
   const onClickMoveToBoardDetail = (event: MouseEvent<HTMLDivElement>) => {
     void router.push(`/boards/${event.currentTarget.id}`);
   };
-
+  //검색할때의키워드
   const onChangeKeyword = (value: string) => {
     setKeyword(value);
   };

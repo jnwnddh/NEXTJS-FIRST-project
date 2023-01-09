@@ -11,11 +11,15 @@ export default function LayoutHeader() {
   const onClickMoveToLogin = () => {
     void router.push("/login");
   };
+  const onClickSignup = () => {
+    void router.push("/signup");
+  };
 
   return (
     <LayoutHeaderUI
       onClickLogo={onClickLogo}
       onClickMoveToLogin={onClickMoveToLogin}
+      onClickSignup={onClickSignup}
     />
   );
 }

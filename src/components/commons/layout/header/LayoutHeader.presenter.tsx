@@ -14,7 +14,7 @@ export default function LayoutHeaderUI(props: ILayoutHeaderProps) {
         <InnerLogo onClick={props.onClickLogo}>💎LIVE중고마켓</InnerLogo>
         <div>
           <LoginButton onClick={props.onClickMoveToLogin}>로그인</LoginButton>
-          <InnerButton>회원가입</InnerButton>
+          <InnerButton onClick={props.onClickSignup}>회원가입</InnerButton>
         </div>
       </InnerWrapper>
     </Wrapper>

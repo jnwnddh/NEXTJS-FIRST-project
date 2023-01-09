@@ -6,6 +6,9 @@ export default function LayoutNavCardUI() {
   const noticeboard = () => {
     void router.push("/boards");
   };
+  const gostore = () => {
+    void router.push("/store");
+  };
   return (
     <t.Container>
       <t.Herosection>
@@ -17,7 +20,7 @@ export default function LayoutNavCardUI() {
               <t.Cardheading>마이페이지</t.Cardheading>
             </t.Cardcontent>
           </t.Card>
-          <t.Card>
+          <t.Card onClick={gostore}>
             <t.Cardbackground src="https://cdn.pixabay.com/photo/2022/11/11/12/25/miniature-shopping-cart-7584887__340.jpg" />
             <t.Cardcontent>
               <t.Cardcategory>Category</t.Cardcategory>

@@ -4,7 +4,6 @@ import ReactPlayer from "react-player";
 
 export const Wrapper = styled.div`
   width: 1200px;
-  border: 1px solid red;
 `;
 
 export const CardWrapper = styled.div`
